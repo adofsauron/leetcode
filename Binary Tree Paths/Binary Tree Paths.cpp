@@ -13,37 +13,54 @@
 */
 class Solution {
 public:
-    vector<string> binaryTreePaths(TreeNode* root) {
+    vector<string> binaryTreePaths(TreeNode* root) 
+    {
         vector<string> res;
-        if(root == NULL)    return res;
+        if(root == NULL)    
+        	return res;
+
         string s;
         dfs(res,s,root);
         return res;
     }
-    void dfs(vector<string>& res,string s,TreeNode* ptr){
-        if(ptr->val == 0)   s += '0';
-        else{
-            if(ptr->val < 0){
+
+    void dfs(vector<string>& res,string s,TreeNode* ptr)
+    {
+        if(ptr->val == 0)   
+        	s += '0';
+        else
+        {
+            if(ptr->val < 0)
+            {
                 ptr->val *= -1;
                 s += '-';
             }
             string tmp;
-            while(ptr->val){
+            while(ptr->val)
+            {
                 tmp += ((ptr->val % 10) + '0');
                 ptr->val /= 10;
             }
+            
             reverse(tmp.begin(),tmp.end());
             s += tmp;
         }
-        if(ptr->left == NULL && ptr->right == NULL){
+
+        if(ptr->left == NULL && ptr->right == NULL)
+        {
             res.push_back(s);
             return ;
         }
-        else{
+        else
+        {
             s += '-';
             s += '>';
-            if(ptr->left)   dfs(res,s,ptr->left);
-            if(ptr->right)      dfs(res,s,ptr->right);
+
+            if(ptr->left)   
+            	dfs(res,s,ptr->left);
+
+            if(ptr->right)      
+            	dfs(res,s,ptr->right);
         }
     }
 };

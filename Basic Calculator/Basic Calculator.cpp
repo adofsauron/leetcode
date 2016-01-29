@@ -8,53 +8,74 @@
     4.注意数字可能大于9
 
 */
-class Solution {
+
+class Solution
+{
 public:
-    int calculate(string s) {
+    int calculate(string s) 
+    {
         stack<int> digit;
         stack<char> op;
+
         int n = 0;
-        while(n < s.size()){
+        while(n < s.size())
+        {
             //空格跳过
-            if(isspace(s[n])){
+            if(isspace(s[n]))
+            {
                 n++;
                 continue;
             }
-            if(isdigit(s[n])){
-                //读数字
+
+            if(isdigit(s[n])) //读数字
+            {
                 int tmp = 0;
-                while(n < s.size() && isdigit(s[n])){
+                while(n < s.size() && isdigit(s[n]))
+                {
                     tmp = 10 * tmp + s[n] - '0';
                     n++;
                 }
-                if(op.empty() || op.top() == '(')  digit.push(tmp);
-                else if(op.top() == '+'){
+
+                if(op.empty() || op.top() == '(')  
+                	digit.push(tmp);
+                else if(op.top() == '+')
+                {
                     tmp = digit.top() + tmp;
                     digit.pop();
                     op.pop();
                     digit.push(tmp);
                 }
-                else {
+                else
+                {
                     tmp = digit.top() - tmp;
                     digit.pop();
                     op.pop();
                     digit.push(tmp);
                 }
             }
-            else{
-                //如果是),直接把符号栈栈顶元素给弹出，因为栈顶元素必然是(，然后将符号栈和数字栈进行运算，直到不能运算为止
-                if(s[n] == ')'){
+            else //如果是),直接把符号栈栈顶元素给弹出，因为栈顶元素必然是(，然后将符号栈和数字栈进行运算，直到不能运算为止
+           	{
+                if(s[n] == ')')
+                {
                     op.pop();
-                    while(op.size() && op.top() != '('){
-                        int digit1 = digit.top();digit.pop();
-                        int digit2 = digit.top();digit.pop();
-                        if(op.top() == '+')     digit.push(digit2 + digit1);
-                        else    digit.push(digit2 - digit1);
+                    while(op.size() && op.top() != '(')
+                    {
+                        int digit1 = digit.top();
+                        digit.pop();
+                        int digit2 = digit.top();
+                        digit.pop();
+
+                        if(op.top() == '+')    
+                        	digit.push(digit2 + digit1);
+                        else    
+                        	digit.push(digit2 - digit1);
+
                         op.pop();
                     }
-                }
-                //如果+,-,(就直接入符号栈
-                else    op.push(s[n]);
+                } 
+                else     //如果+,-,(就直接入符号栈
+                	op.push(s[n]);
+
                 n++;
             }
         }
