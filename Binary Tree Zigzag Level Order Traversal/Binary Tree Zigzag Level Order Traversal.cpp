@@ -16,6 +16,7 @@ public:
         vector<vector<int> > res;
         if(root == NULL)    
         	return res;
+        
         stack<TreeNode *> s[2];
         int dep = 0;
         s[dep].push(root);

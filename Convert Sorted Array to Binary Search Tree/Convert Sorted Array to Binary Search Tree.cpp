@@ -1,3 +1,7 @@
+/*
+	Given an array where elements are sorted in ascending order, convert it to a height balanced BST.
+*/
+
 /**
  * Definition for binary tree
  * struct TreeNode {
@@ -15,20 +19,30 @@
     左子树由[lhs,mid)构成,右子树由[mid + 1,rhs)构成
     这样递归构造就可以了
 */
-class Solution {
+
+
+class Solution 
+{
 public:
-    TreeNode *sortedArrayToBST(vector<int> &num) {
+
+    TreeNode *sortedArrayToBST(vector<int> &num) 
+    {
         TreeNode *root = NULL;
-        build(num,root,num.size() / 2,0,num.size());
+        build(num, root, num.size() / 2, 0, num.size());
         return root;
     }
-    void build(vector<int> &num,TreeNode* &p,int id,int lhs,int rhs)
+
+    void build(vector<int> &num, TreeNode* &p, int id, int lhs, int rhs)
     {
-        if(id < lhs || id >= rhs)   return ;
+        if(id < lhs || id >= rhs)   
+        	return ;
+
         p = new TreeNode(num[id]);
         TreeNode *pl = NULL,*pr = NULL;
-        build(num,pl,(lhs + id) / 2,lhs,id);
-        build(num,pr,(id + 1 + rhs) / 2,id + 1,rhs);
+
+        build(num, pl, (lhs + id) / 2, lhs, id);
+        build(num, pr, (id + 1 + rhs) / 2, id + 1, rhs);
+
         p->left = pl;
         p->right = pr;
     }
