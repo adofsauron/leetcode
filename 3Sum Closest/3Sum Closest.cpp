@@ -9,14 +9,15 @@ public:
     int threeSumClosest(vector<int>& nums, int target) 
     {
         sort(nums.begin(),nums.end());
+
         int res = nums[0] + nums[1] + nums[2];
 
         int n = nums.size();
         for(int i = 0; i < n && res != target; i++)
-        {            //枚举a
+        {           											//枚举a
             if(i && nums[i] == nums[i-1])     
             	continue;         								//排除重复的解
-            
+
             int lhs = i+1,rhs = n-1;                            //b和c的下标
             while(rhs > lhs)
             {                                   				//O(n)枚举b和c
